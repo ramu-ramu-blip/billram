@@ -5,6 +5,7 @@ import { TbPassword } from "react-icons/tb";
 import { FaRepeat } from "react-icons/fa6";
 import {validatePassword} from "val-pass"
 import toast from 'react-hot-toast';
+import { CiMail } from "react-icons/ci";
 
 
 
@@ -52,6 +53,7 @@ let handleSumbit=(e)=>{
       toast.error("passsword and confirm password did not match")
   return
     }
+    toast.success("Successfully sumbited")
 console.log(state);
   
 }
@@ -79,14 +81,14 @@ console.log(state);
 
          <div  className='w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3' >
             <input type="email" name="email" placeholder='Enter your email'  className='  w-[100%] outline-0 text-[18px]'onChange={handleChange} />
-            <span><CgNametag /></span>
+            <span><CiMail /></span>
           </div>      
 
 
 
            <div  className='w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3' >
             <input type="password" name="password" placeholder='Enter your password'  className='  w-[100%] outline-0 text-[18px]'onChange={handleChange} />
-            <span><CgNametag /></span>
+            <span><TbPassword /></span>
           </div>
 
           <div className={ errormessage?'w-[80%] bg-white flex justify-center items-center text-red-400  rounded-sm   px-5  py-3  ':'hidden'}>
@@ -94,11 +96,11 @@ console.log(state);
           </div>
  
            <div  className={`w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3 ${!match?'border-red-600':'border-l-black'}`}>
-            <input type="password" name="repeatpassword" placeholder=' Repeat password'   className='  w-[100%] outline-0 text-[18px]' onChange={handlePassword}/>
+            <input  type="password" name="repeatpassword" placeholder=' Repeat password'   className='  w-[100%] outline-0 text-[18px]' onChange={handlePassword}/>
             <span><FaRepeat /></span>
           </div>
 
-          <div className='w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400 '>
+          <div className='w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
             <button className='w-full'>click</button>
             </div>
         </form>
