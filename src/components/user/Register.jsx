@@ -55,10 +55,26 @@ let handleSumbit=(e)=>{
     if(!match){
       toast.error("passsword and confirm password did not match")
   return
-    }
-    toast.success("Successfully sumbited")
-empService.regUser(state)
-
+    };
+      
+    (
+      async()=>{
+        let data=await empService.regiUser(state)
+      try{
+          if(data.status==201)
+          {
+            toast.success("Register sucessfully")
+            navigate("/login")
+          }
+          else{
+            toast.error("something error")
+          }
+      }
+      catch(error){
+        toast.error("something went wrong")
+      }
+        
+      })()
   
 }
 
