@@ -6,13 +6,16 @@ import { FaRepeat } from "react-icons/fa6";
 import {validatePassword} from "val-pass"
 import toast from 'react-hot-toast';
 import { CiMail } from "react-icons/ci";
+import empService from '../../service/empService';
+import { useNavigate } from 'react-router';
 
 
 
 const Register = () => {
+  let navigate=useNavigate()
 let [state,setState]=useState({
   name:"",
-  username:"", 
+  userName:"", 
   email:"",
   password:""
 })
@@ -39,8 +42,8 @@ let handleChange=(e)=>{
 let handleSumbit=(e)=>{
   e.preventDefault()
  
-  let {name,username,password,email}=state
-    if(!name||!username||!password||!email){
+  let {name,userName,password,email}=state
+    if(!name||!userName||!password||!email){
       toast.error("All feilds are mandatory")
       return
     }
@@ -54,9 +57,11 @@ let handleSumbit=(e)=>{
   return
     }
     toast.success("Successfully sumbited")
-console.log(state);
+empService.regUser(state)
+
   
 }
+
 
 
   return (
@@ -73,7 +78,7 @@ console.log(state);
           </div>
 
            <div className='w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3'>
-            <input type="text" name="username" placeholder='Enter your Username'   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
+            <input type="text" name="userName" placeholder='Enter your Username'   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
             <span><FaUserNurse /></span>
           </div>
 
