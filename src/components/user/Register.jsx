@@ -11,10 +11,10 @@ import { useNavigate } from 'react-router';
 
 
 
-const Register = () => {
+const Register = (b) => {
   let navigate=useNavigate()
 let [state,setState]=useState({
-  name:"",
+  name:"", 
   userName:"", 
   email:"",
   password:""

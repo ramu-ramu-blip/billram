@@ -3,12 +3,15 @@ import { validatePassword } from 'val-pass'
 import { CiMail } from "react-icons/ci";
 import { TbPassword } from "react-icons/tb";
 import toast from 'react-hot-toast';
+import empService from '../../service/empService';
+import { Link, useNavigate } from 'react-router';
 
 
 
 
 const Login = () => {
 
+  let navigate=useNavigate()
     let [state,setState]=useState({
   
   email:"",
@@ -26,17 +29,34 @@ let handleChange=(e)=>{
 let handleSumbit=(e)=>{
   e.preventDefault()
    let {password,email}=state
+console.log(state);
 
     if(!password||!email){
       toast.error("All feilds are mandatory")
       return
     }
- 
+  
+(
+      async()=>{
+        let data=await empService.loginUser(state)
+      try{
+          if(data.status==200)
+          {
+            toast.success("login sucessfully")
+            navigate("/home")
+           
+          }
+          else{
+           
+            toast.error(`${data.response.data.message}`)
+          }
+      }
+      catch(error){
+        toast.error("something went wrong")
+      }
+        
+      })()
      
-  
-
-  
-   
    
      }
 
@@ -65,6 +85,8 @@ let handleSumbit=(e)=>{
              <div className='w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
             <button className='w-full'>click</button>
             </div>
+
+            <div className='hover:underline'><Link to ="register">click to here register</Link></div>
               
             </form>
         </div>
