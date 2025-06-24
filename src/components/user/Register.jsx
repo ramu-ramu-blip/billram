@@ -64,7 +64,7 @@ let handleSumbit=(e)=>{
           if(data.status==201)
           {
             toast.success("Register sucessfully")
-            navigate("/login")
+            navigate("/")
           }
           else{
             toast.error("something error")

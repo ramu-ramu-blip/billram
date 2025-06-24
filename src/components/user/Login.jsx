@@ -86,7 +86,7 @@ console.log(state);
             <button className='w-full'>click</button>
             </div>
 
-            <div className='hover:underline'><Link to ="register">click to here register</Link></div>
+            <div className='hover:underline'><Link to ="/register">click to here register</Link></div>
               
             </form>
         </div>
