@@ -6,8 +6,15 @@ import Home from "../components/user/main/home/Home";
 import Addbills from "../components/user/main/addBills/Addbills";
 import About from "../components/user/main/about/About";
 import FilterBills from "../components/user/main/filterBills/FilterBills";
+import AddItems from "../components/user/main/addBills/AddItems";
 
 let routes=createBrowserRouter ([
+
+
+    {
+        path:"/additem",
+        element:<AddItems></AddItems>
+    },
     {
         path:"/register",
         element:<Register></Register>
@@ -27,7 +34,14 @@ let routes=createBrowserRouter ([
             },
             {
                 path:"addBills",
-                element:<Addbills></Addbills>
+                element:<Addbills></Addbills>,
+                // children:[
+                //     {
+                //        index:true,
+                //        path:"additem",
+                //         element:<AddItems></AddItems>
+                //     }
+                // ]
             },
             {
                 path:"about",

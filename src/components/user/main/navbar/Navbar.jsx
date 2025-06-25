@@ -11,11 +11,11 @@ const Navbar = () => {
   const hadleShow=()=>{
     setShow(!show)
   }
-  console.log(show);
+ 
   
   return (
     
-   <div className={` '    bg-amber-300 w-full h-[80px] flex justify-around items-center
+   <div className={` ' bg-amber-300 w-full h-[80px] flex justify-around items-center
      text-xl ${show?'flex flex-col justify-around gap-2 items-start px-7 py-6 h-[250px]':""} 
      sm:flex-row sm:h-[80px] sm:justify-around sm:items-center  `}>
          
@@ -26,7 +26,7 @@ const Navbar = () => {
          }
         </div>
 
-         <div   className={`max-sm:hidden${show?'block':""}`}>
+         <div   className={`max-sm:hidden ${show?'block':""}`}>
           <NavLink    className={({isActive})=>isActive?"bg-amber-100 p-2 rounded-sm ":""} end  to="/home">Home</NavLink>
           </div>
  

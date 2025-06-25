@@ -1,6 +1,20 @@
 import React, { useState } from 'react'
+import { data, useNavigate } from 'react-router'
 
 const Addbills = () => {
+  let navigation=useNavigate()
+  let [btnclick,setBtn]=useState(false)
+
+  let handleBtn=()=>{
+    setBtn(!btnclick)
+    
+    
+  }
+  console.log(btnclick);
+
+  const render=()=>{
+    navigation("/additem")
+  }
 
   const [bill,setBill]=useState(
     {
@@ -40,7 +54,7 @@ const Addbills = () => {
               </div>
     
                <div className='w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3'>
-                <input type="text" name="PoNo" placeholder='Enter your PoNo'   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
+                <input type="text" name="PoNo" placeholder='Enter your PoNo' value={data}   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
               
               </div>
 
@@ -70,6 +84,12 @@ const Addbills = () => {
                 <input type="text" name="clientBankName" placeholder='Enter your clientBankName'   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
                
               </div>
+ 
+
+              <div   onChange={handleBtn} className='w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
+                <button onClick={render}  className={`'w-full '`} >AddItem   </button>
+              
+                </div>
 
     
               
