@@ -35,13 +35,7 @@ let routes=createBrowserRouter ([
             {
                 path:"addBills",
                 element:<Addbills></Addbills>,
-                // children:[
-                //     {
-                //        index:true,
-                //        path:"additem",
-                //         element:<AddItems></AddItems>
-                //     }
-                // ]
+            
             },
             {
                 path:"about",

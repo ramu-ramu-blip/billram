@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AddItems = () => {
+const AddItems = ({removeItem,val}) => {
      const [bill,setBill]=useState(
         {
         description:"",
@@ -23,10 +23,25 @@ const AddItems = () => {
      console.log(bill);
      
       }
+
+
+
+
+      
   return (
-     <div  className='  bg-[#bfb4b46f] bg-[url()] size-full  flex justify-center items-center'  >
-            <form action="" onSubmit={handleSumbit} className='bg-white h-[90%] max-sm:w-[90%]  overflow-scroll rounded-bl-lg shadow-2xl w-[35%] flex  items-center flex-col gap-6 py-14  ' >
+     <div  className='  bg-[#bfb4b46f] bg-[url()] size-full  flex justify-center items-center  w-full '  >
+
+      
+            <div action="" onSubmit={handleSumbit} className='bg-white  h-[90%] max-sm:w-[90%]  overflow-scroll rounded-bl-lg shadow-2xl w-[80%] flex  items-center flex-col gap-6 py-14  ' >
     
+        <div  className='flex items-center gap-2 bg-red-400 px-4 py-1 rounded-xl hover:bg-red-600 text-amber-200 hover:text-amber-100 hover:font-medium cursor-pointer' 
+         onClick={()=>{
+            removeItem(val.id)
+          }}   >
+            <div    >Remove Items</div>
+        </div>
+
+          
               <div className='w-[80%]  py-3 bg-white flex justify-center items-center rounded-sm'>
                 <h1  className='text-[28px] max-sm:text-sm '>Add items form</h1>
               </div>
@@ -68,7 +83,7 @@ const AddItems = () => {
               <div className='  max-sm:text-[25px]  w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
                 <button className='w-full'>Click</button>
                 </div>
-            </form>
+            </div>
         </div>
   )
 }

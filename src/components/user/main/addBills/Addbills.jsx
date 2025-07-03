@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { data, useNavigate } from 'react-router'
+import AddItems from './AddItems'
 
 const Addbills = () => {
   let navigation=useNavigate()
@@ -10,11 +11,8 @@ const Addbills = () => {
     
     
   }
-  console.log(btnclick);
 
-  const render=()=>{
-    navigation("/additem")
-  }
+
 
   const [bill,setBill]=useState(
     {
@@ -28,6 +26,16 @@ const Addbills = () => {
     clientBankName:""
     }
   )
+  const [item,setItem]=useState([])
+
+  const handleClick=(e)=>{
+    const newObg={
+      id:Date.now()
+    }
+     
+      setItem((preval)=>([...preval,newObg]))
+    
+  }
 
   const handleChange =(e)=>{
     let{name,value}=e.target
@@ -40,10 +48,17 @@ const Addbills = () => {
  
   }
 
+
+  const removeItem=(id)=>{
+           setItem(item.filter((val)=>val.id!=id))
+      }
+
   return (
      <div  className='  bg-[#bfb4b46f] bg-[url()] size-full  flex justify-center items-center'  >
             <form action="" onSubmit={handleSumbit} className='bg-white h-[90%] max-sm:w-[90%]  overflow-scroll rounded-bl-lg shadow-2xl w-[35%] flex  items-center flex-col gap-6 py-14  ' >
     
+            
+
               <div className='w-[80%]  py-3 bg-white flex justify-center items-center rounded-sm'>
                 <h1  className='text-[28px] max-sm:text-sm '>Add Bill form</h1>
               </div>
@@ -54,7 +69,7 @@ const Addbills = () => {
               </div>
     
                <div className='w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3'>
-                <input type="text" name="PoNo" placeholder='Enter your PoNo' value={data}   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
+                <input type="text" name="PoNo" placeholder='Enter your PoNo'    className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
               
               </div>
 
@@ -85,9 +100,14 @@ const Addbills = () => {
                
               </div>
  
+            {
+                item.map((val)=><AddItems key={val.id} removeItem={removeItem} val={val}>
 
-              <div   onChange={handleBtn} className='w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
-                <button onClick={render}  className={`'w-full '`} >AddItem   </button>
+                </AddItems>)
+            }
+
+              <div    className='w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
+                <button  type='button' onClick={handleClick}  className={`'w-full '`} >AddItem   </button>
               
                 </div>
 
