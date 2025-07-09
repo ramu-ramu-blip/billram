@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { validatePassword } from 'val-pass'
 import { CiMail } from "react-icons/ci";
 import { TbPassword } from "react-icons/tb";
 import toast from 'react-hot-toast';
 import empService from '../../service/empService';
 import { Link, useNavigate } from 'react-router';
+import { contextApi } from '../context/Context ';
 
 
 
@@ -12,6 +13,7 @@ import { Link, useNavigate } from 'react-router';
 const Login = () => {
 
   let navigate=useNavigate()
+  const {globalState,setGlobalState}=useContext(contextApi) 
     let [state,setState]=useState({
   
   email:"",
@@ -20,7 +22,7 @@ const Login = () => {
 
 
   
-
+ 
 let handleChange=(e)=>{
   let{name,value}=e.target
   setState((preval)=>({...preval,[name]:value})) 
@@ -43,6 +45,7 @@ console.log(state);
           if(data.status==200)
           {
             toast.success("login sucessfully")
+            setGlobalState((preVal)=>({...preVal,token:data.data.token}))
             navigate("/home")
            
           }

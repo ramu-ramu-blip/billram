@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AddItems = ({removeItem,val}) => {
+const AddItems = ({removeItem,val,updateElements}) => {
      const [bill,setBill]=useState(
         {
         description:"",
@@ -15,7 +15,8 @@ const AddItems = ({removeItem,val}) => {
     
       const handleChange =(e)=>{
         let{name,value}=e.target
-        setBill((preVal)=>({...preVal,[name]:value}))
+       // setBill((preVal)=>({...preVal,[name]:value}))
+       updateElements(val.id,name,value)
       }
     
       const handleSumbit=(e)=>{
@@ -80,9 +81,7 @@ const AddItems = ({removeItem,val}) => {
 
              
     
-              <div className='  max-sm:text-[25px]  w-[80%] bg-amber-200 flex justify-center items-center border-0 rounded-sm  tracking-[0.5px] text-[19px] py-3 hover:bg-amber-400  active:bg-green-300 active:scale-[0.9]'>
-                <button className='w-full'>Click</button>
-                </div>
+              
             </div>
         </div>
   )

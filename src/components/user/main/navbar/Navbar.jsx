@@ -15,7 +15,7 @@ const Navbar = () => {
   
   return (
      
-   <div className={`   fixed  ' bg-amber-300 w-full h-[80px] flex justify-around items-center
+   <div className={`     ' bg-amber-300 w-full h-[80px] flex justify-around items-center
      text-xl ${show?'flex flex-col justify-around gap-2 items-start px-7 py-6 h-[250px]':""} 
      sm:flex-row sm:h-[80px] sm:justify-around sm:items-center  `}>
          

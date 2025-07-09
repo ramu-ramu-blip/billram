@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { data, useNavigate } from 'react-router'
 import AddItems from './AddItems'
+import { contextApi } from '../../../context/Context '
+import empService from '../../../../service/empService'
+import toast from 'react-hot-toast'
 
 const Addbills = () => {
   let navigation=useNavigate()
-  let [btnclick,setBtn]=useState(false)
+  // let [btnclick,setBtn]=useState(false)
+  
 
-  let handleBtn=()=>{
-    setBtn(!btnclick)
+  // let handleBtn=()=>{
+  //   setBtn(!btnclick)
     
     
-  }
+  // }
 
 
 
@@ -18,7 +22,7 @@ const Addbills = () => {
     {
     companyName:"",
     PoNo:"",
-    invoiceDate:"",
+    invoiceDate:new Date().toISOString().split("T")[0],
     workCompletionDate:"",
     address:"",
     PAN:"",
@@ -27,13 +31,20 @@ const Addbills = () => {
     }
   )
   const [item,setItem]=useState([])
+  const {globalState}=useContext(contextApi)
 
   const handleClick=(e)=>{
-    const newObg={
-      id:Date.now()
+     let newObj={
+      id:Date.now(),
+      description:"",
+      quantity:"",
+      rate:"",
+      cgstPercent:"",
+      sgstPercent:""
     }
+   setItem((preVal)=>([...preVal,newObj])) 
      
-      setItem((preval)=>([...preval,newObg]))
+     
     
   }
 
@@ -45,13 +56,70 @@ const Addbills = () => {
   const handleSumbit=(e)=>{
     e.preventDefault()
  console.log(bill);
+  let {companyName,workCompletionDate,PoNo,address,PAN,GSTNo,clientBankName}=bill
+    let totalAmount=item.reduce((acc,val)=>{
+      const base=parseInt(val.amount)
+      const cgst=base*parseInt(val.cgstPercent)/100
+      const sgst=base*parseInt(val.sgstPercent)/100
+
+      // console.log(base,cgst,sgst,acc);
+      
+      return acc+base+cgst+sgst
+    },0)
+    let payload={
+      companyName,
+      workCompletionDate,
+      PoNo,
+      address,
+      PAN,
+      GSTNo,
+      clientBankName,
+      items:item,
+      invoiceDate:new Date().toISOString().split("T")[0],
+      totalAmount
+    }
+    console.log(payload);
+    (async()=>{
+try {
+        let data=await empService.addBills(payload,globalState.token)
+      if(data.status==201){
+        toast.success("Bills added successfully")
+        navigation("/home")
+      }else{
+        toast.error("Something went wrong")
+      }
+} catch (error) {
+  toast.error("Something went wrong")
+}
+    })();
  
   }
+  
 
 
   const removeItem=(id)=>{
            setItem(item.filter((val)=>val.id!=id))
       }
+     const updateElements=(id,name,value)=>{
+    // console.log(id,name,value);
+    
+    setItem((preVal)=>{
+     return preVal.map((val)=>{
+        if(val.id==id){
+      
+          
+          const updateItems={
+            ...val,[name]:value
+          }
+          updateItems.amount=val.rate*val.quantity
+          return updateItems
+        }
+
+        return val
+      })
+
+    })
+  }
 
   return (
      <div  className='  bg-[#bfb4b46f] bg-[url()] size-full  flex justify-center items-center'  >
@@ -75,7 +143,7 @@ const Addbills = () => {
 
               
                <div className='w-[80%] bg-white flex justify-center items-center border-1  rounded-sm   px-5  py-3'>
-                <input type="date" name="workCompletionDate" placeholder='Enter your work Completion Date'   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange}/>
+                <input type="date" name="workCompletionDate" placeholder='Enter your work Completion Date'   className='  w-[100%] outline-0 text-[18px]' onChange={handleChange} max={new Date().toISOString().split("T")[0]}/>
                 
               </div>
 
@@ -101,7 +169,10 @@ const Addbills = () => {
               </div>
  
             {
-                item.map((val)=><AddItems key={val.id} removeItem={removeItem} val={val}>
+                item.map((val)=><AddItems key={val.id} 
+                removeItem={removeItem} 
+                val={val}
+                 updateElements={updateElements}>
 
                 </AddItems>)
             }
