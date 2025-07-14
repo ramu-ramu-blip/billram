@@ -63,7 +63,80 @@ let empService={
            console.log(error);
            return error 
         }
-    }
+    },
+    updateBills:async (payload,token,id)=>{
+        console.log(payload);
+        
+        try {
+            let data=await axiosInstace.put(`/update-bill/${id}`,payload,{
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+
+            // console.log(data);
+            return data
+            
+        } catch (error) {
+            // console.log(error);
+            return error
+        }
+    },
+     deleteBills:async (token,id)=>{
+        console.log(token);
+        
+        try {
+            let data=await axiosInstance.delete(`/delete-bill/${id}`,{
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+
+            // console.log(data);
+            return data
+            
+        } catch (error) {
+            // console.log(error);
+            return error
+        }
+    },
+    companyName:async (token)=>{
+        console.log(token);
+        
+        try {
+            let data=await axiosInstance.get("get-company-names",{
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+
+            // console.log(data);
+            return data
+            
+        } catch (error) {
+            // console.log(error);
+            return error
+        }
+    },     filteredBills:async (token,query)=>{
+        console.log(token);
+        
+        try {
+            let data=await axiosInstance.get(`/filter-bills?${query}`,{
+                headers:{
+                    "Authorization":`Bearer ${token}`
+                }
+            })
+
+            // console.log(data);
+            return data
+            
+        } catch (error) {
+            // console.log(error);
+            return error
+        }
+    },
+    
+    
 }
 export default empService
 

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router'
 const Home = () => {
   const navigate=useNavigate()
   const { globalState } = useContext(contextApi)
-  const [allBills, setAllBills] = useState([])
+  const [allBills, setAllBills] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -20,8 +20,8 @@ const Home = () => {
   }, [])
   console.log(allBills);
 
-  const updateBill=()=>{
-    navigate("updatebill")
+  const handleUpdateBill=(bill)=>{
+    navigate("updatebill",{state:bill})
   }
   
   return (
@@ -40,7 +40,9 @@ const Home = () => {
             <p><span className="font-semibold">Invoice Date:</span> {new Date(bill.invoiceDate).toLocaleDateString()}</p>
           </div>
           <div className='flex w-full gap-4 m-2'>
-            <button onClick={updateBill} className='bg-amber-300 w-full  rounded-sm h-8'>Update</button>
+            <button onClick={()=>{
+              handleUpdateBill(bill)
+            }} className='bg-amber-300 w-full  rounded-sm h-8'>Update</button>
             <button className='bg-green-300 w-full rounded-sm h-8'>Delete</button>
           </div>
         </div>

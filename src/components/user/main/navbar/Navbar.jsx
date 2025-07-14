@@ -41,8 +41,8 @@ const Navbar = () => {
         <div    className={`max-sm:hidden${show?'block':""}`}>
           <NavLink className={({isActive})=>isActive?"bg-amber-100 p-2 rounded-sm ":""}   to="about">About</NavLink>
         </div>
-               
-       
+
+         
        
    </div>
         
